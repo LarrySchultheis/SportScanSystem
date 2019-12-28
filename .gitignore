@@ -6,3 +6,5 @@ env/
 .vscode/settings.json
 
 __pycache__/
+
+.vscode/
