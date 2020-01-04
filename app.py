@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, send_from_directory, request
 from flask_mysqldb import MySQL
 import json
 app = Flask(__name__)
@@ -24,5 +24,5 @@ def home():
         mysql.connection.commit()
         cur.close()
         return date
-    return render_template(index.html)
+    return send_from_directory('Templates', 'index.html')
 
