@@ -26,3 +26,18 @@ def home():
         return date
     return send_from_directory('Templates', 'index.html')
 
+@app.route("/GetReport", methods=['GET', 'POST'])
+def getReport():
+    
+    return send_from_directory("Templates", "report.html")
+
+
+@app.route("/NewEntry", methods=['GET'])
+def newEntry():
+
+    return send_from_directory("Templates", "newEntry.html")
+
+@app.route("/PostEntry", methods=["POST"])
+def postEntry(data):
+
+    return data
