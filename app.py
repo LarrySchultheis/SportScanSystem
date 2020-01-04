@@ -10,16 +10,19 @@ app.config['MYSQL_DB'] = 'classicmodels'
 
 mysql = MySQL(app)
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def home():
-    cur = mysql.connection.cursor()
-    cur.execute("select * from customers")
-    data = cur._rows
-    obj = {
-        "data" : data[0][0]
-    }
-
-    mysql.connection.commit()
-    cur.close()
-    return obj
+    if request.method == "POST":
+        info = request.form
+        date = info['date']
+        cur = mysql.connection.cursor()
+        #cur.execute("select * from customers")
+        #data = cur._rows
+        #obj = {
+        #    "data" : data[0][0]
+        #}
+        mysql.connection.commit()
+        cur.close()
+        return date
+    return render_template(index.html)
 
