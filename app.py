@@ -12,23 +12,37 @@ mysql = MySQL(app)
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    if request.method == "POST":
-        info = request.form
-        date = info['date']
-        cur = mysql.connection.cursor()
-        #cur.execute("select * from customers")
-        #data = cur._rows
-        #obj = {
-        #    "data" : data[0][0]
-        #}
-        mysql.connection.commit()
-        cur.close()
-        return date
-    return send_from_directory('Templates', 'index.html')
+    # if request.method == "POST":
+    #     info = request.form
+    #     date = info['date']
+    #     cur = mysql.connection.cursor()
+    #     #cur.execute("select * from customers")
+    #     data = cur._rows
+    #     obj = {
+    #         "data" : data[0][0]
+    #     }
+    #     mysql.connection.commit()
+    #     cur.close()
+    #     return date
+    return send_from_directory('web', 'index.html')
 
-@app.route("/getreport", methods=['GET'])
-def getreport():
-    date = request.values['date']
+@app.route('/js/report.js', methods=["GET"])
+def get_script():
+    doctype = 'text/js'
+    return send_from_directory('web/js', 'report.js', mimetype=doctype)
+
+@app.route("/Report", methods=['GET'])
+def report():
+    
+    return send_from_directory("web", "report.html")
+
+@app.route("/GetReport", methods=['POST'])
+def GetReport():
+    #date = request.values['date']
+    data = request.get_json()
+    date = data["date"]
+    print(date)
+    
 
     command = "select * from articles where articles.DOE LIKE '" + date+"%'"
 
@@ -68,5 +82,10 @@ def getreport():
             prevTeam = teamName
     object['teams'].append(appendObject)
     del object['teams'][0] 
-      
-    return "woo"
+    reply = json.dumps(object)
+    print(reply)
+    #return send_from_directory("web", "report.html")
+    return reply
+
+if __name__ == '__main__':
+    app.run(port = 5000)
