@@ -4,9 +4,13 @@
   <title>Generate Report</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  
+  <script src="js/report.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://bootswatch.com/3/slate/bootstrap.min.css">
+  
 </head>
 <body>
 
@@ -23,63 +27,47 @@
   </div>
 </nav>
   
-<div class="container">
-  <h1>Generate Report</h1>
-  
-  <div style="text-align: center;">
-
-    <form onsubmit="reqReport()">
-      <h1>Enter The Date </h1> <br>
-            <p>Date of Entry:  <input id="dateField" type="date"> </p> <br> <br>
-        <input type="submit">
-    </form>
-
-
-    <!-- <h1>Enter The Date </h1> <br>
-    <p>Date of Entry:  <input id="dateField" type="date"> </p> <br> <br>
-    <button id="submitBtn" onclick="reqReport()">Submit</button> -->
-  </div>
+<div class="jumbotron" style="padding-left: 5%;">
+  <h1>Sport Scan Reporting</h1>
+  <br><br>
+  <h2>Generate Report</h2>
 
 
 </div>
 
 
+<div class="row">
+  <div class="col-lg-6">
+    <div style="text-align: left; padding-left: 5%;">
+
+      <form onsubmit="reqReport()">
+        <h1>Enter The Date of the Report</h1> <br>
+              <p>Date of Entry:  <input id="dateField" type="date"> </p> <br> <br>
+          <input type="submit">
+      </form>
+  
+  
+      <!-- <h1>Enter The Date </h1> <br>
+      <p>Date of Entry:  <input id="dateField" type="date"> </p> <br> <br>
+      <button id="submitBtn" onclick="reqReport()">Submit</button>
+     -->
+    </div>
+  </div>
+
+  <div id="iframeCont" class="col-lg-6">
+      
+  </div>
+</div>
+  
+
+
+
+
+
 </body>
 
 
-<script>
 
-  function reqReport(){
-      var data = JSON.stringify({
-                "date": document.getElementById('dateField').value
-            });
-    
-            alert(data)
-    
-            var url = "http://localhost:5000"
-            var endpoint = "/GetReport"
-            var replyObj
-    
-            var http = new XMLHttpRequest();
-    
-            http.open("POST", url + endpoint);
-            http.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-    
-            http.onreadystatechange = function () {
-                var DONE = 4;       // 4 means that the request is done
-                var OK = 200;       // 200 means a successful return
-    
-                if (http.readyState == DONE && http.status == OK && http.responseText) {
-                    // JSON string
-                    replyString = http.responseText;
-                    alert(replyString)
-                    element.value = replyString 
-                }
-            }
-            http.send(data);
-    
-    }
-  
-  </script>
+
 </html>
 

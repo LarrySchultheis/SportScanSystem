@@ -30,9 +30,8 @@ def parseReport(data, date):
             document.add_paragraph(title)
 
     document.save("./documents/report.docx")
+    return document
 
-    return "done"
+# data = '{ "teams": [{  "name": "NY Yankees",  "titles": ["article1", "article2", "article3"] }, { "name": "Boston Red Sox",  "titles": ["article1", "article2", "article3"]  }  ]}'
 
-data = '{ "teams": [{  "name": "NY Yankees",  "titles": ["article1", "article2", "article3"] }, { "name": "Boston Red Sox",  "titles": ["article1", "article2", "article3"]  }  ]}'
-
-parseReport(json.loads(data), "12/26/1996")
+# parseReport(json.loads(data), "12/26/1996")

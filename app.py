@@ -1,11 +1,13 @@
-from flask import Flask, render_template, send_from_directory, request
+from flask import Flask, render_template, send_from_directory, request, send_file
 from flask_mysqldb import MySQL
 import json
+import docxCreator
+import os
 app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '@2nbx7d2nbx7d'
+app.config['MYSQL_PASSWORD'] = 'Ma$terChief117'
 app.config['MYSQL_DB'] = 'acc2013'
 
 mysql = MySQL(app)
@@ -82,10 +84,21 @@ def GetReport():
             prevTeam = teamName
     object['teams'].append(appendObject)
     del object['teams'][0] 
+
+    docxCreator.parseReport(object, date)
+
     reply = json.dumps(object)
-    print(reply)
+    # print(reply)
     #return send_from_directory("web", "report.html")
-    return reply
+
+    path = os.getcwd()
+    print(path)
+    return send_file(path + "\documents\\report.docx", attachment_filename="report.docx")
+
+@app.route('/NewEntry', methods=['GET'])
+def NewEntry():
+
+    return send_from_directory("web", "newEntry.html")
 
 if __name__ == '__main__':
     app.run(port = 5000)

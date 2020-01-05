@@ -1,30 +1,51 @@
+
 function reqReport(){
-    var data = JSON.stringify({
-              "date": document.getElementById('dateField').value
-          });
-  
-          alert(data)
-  
-          var url = "http://localhost:5000"
-          var endpoint = "/GetReport"
-          var replyObj
-  
-          var http = new XMLHttpRequest();
-  
-          http.open("POST", url + endpoint);
-          http.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-  
-          http.onreadystatechange = function () {
-              var DONE = 4;       // 4 means that the request is done
-              var OK = 200;       // 200 means a successful return
-  
-              if (http.readyState == DONE && http.status == OK && http.responseText) {
-                  // JSON string
-                  alert('in ready state')
-                  replyString = http.responseText;
-                  alert(replyString)
-                  document.getElementById('testReturn').append(replyString)              }
-          }
-          http.send(data);
-  
-  }
+var data = JSON.stringify({
+            "date": document.getElementById('dateField').value
+        });
+
+        alert(data)
+
+        var url = "http://localhost:5000"
+        var endpoint = "/GetReport"
+
+        var http = new XMLHttpRequest();
+
+        http.open("POST", url + endpoint);
+        http.responseType = "blob"
+        http.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+
+        http.onload = function () {
+
+
+            // JSON string
+
+                // replyString = http.responseText;
+                // console.log(replyString)
+
+                // replyObj = JSON.parse(replyString)
+                // var data = replyObj.teams
+                // console.log(data)
+                // element = document.getElementById("testReturn")
+
+                var blob = http.response
+                console.log(blob.size)
+                var link = document.createElement('a')
+                console.log(link)
+                var docSrc = window.URL.createObjectURL(blob)
+            
+                var iframe = document.createElement('element')
+                iframe.src = docSrc
+                document.getElementById('iframeCont').append(iframe)
+            
+                link.href = docSrc
+                link.download="report.docx"
+                link.click()
+            
+        }
+        http.send(data);
+}
+
+function createDoc(){
+
+}
