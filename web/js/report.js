@@ -1,10 +1,19 @@
 
+$(document).ready(function(){
+
+    var input = $('#dateField')[0]  //document.getElementById("dateField")
+    console.log(input)
+    input.addEventListener("keyup", function(event){
+        if (event.keyCode === 13){
+            $('#submitBtn').click()
+        }
+    })
+})
+
 function reqReport(){
 var data = JSON.stringify({
             "date": document.getElementById('dateField').value
         });
-
-        alert(data)
 
         var url = "http://localhost:5000"
         var endpoint = "/GetReport"
@@ -14,38 +23,24 @@ var data = JSON.stringify({
         http.open("POST", url + endpoint);
         http.responseType = "blob"
         http.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+        http.setRequestHeader('Cache-Control', 'no-cache')
 
         http.onload = function () {
 
+            var blob = http.response
+            //console.log(http.getAllResponseHeaders());
+            var fileName = http.getResponseHeader('Content-Disposition')
+            fileName = fileName.replace('attachment; filename=', '')
+            console.log(fileName);
+            //console.log(http);
+            //console.log(blob)
+            var link = document.createElement('a')
+            //console.log(link)
+            link.href = window.URL.createObjectURL(blob)
 
-            // JSON string
-
-                // replyString = http.responseText;
-                // console.log(replyString)
-
-                // replyObj = JSON.parse(replyString)
-                // var data = replyObj.teams
-                // console.log(data)
-                // element = document.getElementById("testReturn")
-
-                var blob = http.response
-                console.log(blob.size)
-                var link = document.createElement('a')
-                console.log(link)
-                var docSrc = window.URL.createObjectURL(blob)
-            
-                var iframe = document.createElement('element')
-                iframe.src = docSrc
-                document.getElementById('iframeCont').append(iframe)
-            
-                link.href = docSrc
-                link.download="report.docx"
-                link.click()
+            link.download=fileName
+            link.click()
             
         }
         http.send(data);
-}
-
-function createDoc(){
-
 }
