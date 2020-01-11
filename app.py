@@ -3,6 +3,7 @@ from flask_mysqldb import MySQL
 import json
 import docxCreator
 import os
+import random
 app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = 'localhost'
@@ -29,9 +30,10 @@ def home():
     return send_from_directory('web', 'index.html')
 
 @app.route('/js/report.js', methods=["GET"])
-def get_script():
+def get_ReportScript():
     doctype = 'text/js'
     return send_from_directory('web/js', 'report.js', mimetype=doctype)
+
 
 @app.route("/Report", methods=['GET'])
 def report():
@@ -87,13 +89,10 @@ def GetReport():
 
     docxCreator.parseReport(object, date)
 
-    reply = json.dumps(object)
-    # print(reply)
-    #return send_from_directory("web", "report.html")
-
     path = os.getcwd()
+    uid = random.randint(0, 100000)
     print(path)
-    return send_file(path + "\documents\\report.docx", attachment_filename="report.docx")
+    return send_file(path + "\documents\\report.docx", as_attachment=True, attachment_filename="report_" + date + ".docx")
 
 @app.route('/NewEntry', methods=['GET'])
 def NewEntry():
