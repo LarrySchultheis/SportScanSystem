@@ -30,10 +30,17 @@ def home():
     return send_from_directory('web', 'index.html')
 
 @app.route('/js/report.js', methods=["GET"])
-def get_ReportScript():
+def getReportScript():
     doctype = 'text/js'
     return send_from_directory('web/js', 'report.js', mimetype=doctype)
 
+@app.route('/images/Logo.png', methods=["GET"])
+def getLogo():
+    return send_from_directory('web/images', 'Logo_blk.png')
+
+@app.route('/css/layout.css', methods=["GET"])
+def getLayout():
+    return send_from_directory('web/css', 'layout.css')
 
 @app.route("/Report", methods=['GET'])
 def report():
@@ -90,7 +97,6 @@ def GetReport():
     docxCreator.parseReport(object, date)
 
     path = os.getcwd()
-    uid = random.randint(0, 100000)
     print(path)
     return send_file(path + "\documents\\report.docx", as_attachment=True, attachment_filename="report_" + date + ".docx")
 
