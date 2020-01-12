@@ -13,27 +13,21 @@ app.config['MYSQL_DB'] = 'acc2013'
 
 mysql = MySQL(app)
 
+#Resource Endpoints -----------------------------------------------------------------------------------------------------------
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    # if request.method == "POST":
-    #     info = request.form
-    #     date = info['date']
-    #     cur = mysql.connection.cursor()
-    #     #cur.execute("select * from customers")
-    #     data = cur._rows
-    #     obj = {
-    #         "data" : data[0][0]
-    #     }
-    #     mysql.connection.commit()
-    #     cur.close()
-    #     return date
     return send_from_directory('web', 'index.html')
+
+@app.route('/NewEntry', methods=['GET'])
+def NewEntry():
+    return send_from_directory("web", "newEntry.html")
 
 @app.route('/js/report.js', methods=["GET"])
 def getReportScript():
     doctype = 'text/js'
     return send_from_directory('web/js', 'report.js', mimetype=doctype)
 
+#Use this to serve logo -- change file name in send_from_directory to serve different logos
 @app.route('/images/Logo.png', methods=["GET"])
 def getLogo():
     return send_from_directory('web/images', 'Logo_blk.png')
@@ -47,6 +41,11 @@ def report():
     
     return send_from_directory("web", "report.html")
 
+#------------------------------------------------------------------------------------------------------------------------------
+
+
+#Functional Endpoints ---------------------------------------------------------------------------------------------------------
+
 @app.route("/GetReport", methods=['POST'])
 def GetReport():
     #date = request.values['date']
@@ -54,7 +53,6 @@ def GetReport():
     date = data["date"]
     print(date)
     
-
     command = "select * from articles where articles.DOE LIKE '" + date+"%'"
 
     cur = mysql.connection.cursor()
@@ -100,10 +98,8 @@ def GetReport():
     print(path)
     return send_file(path + "\documents\\report.docx", as_attachment=True, attachment_filename="report_" + date + ".docx")
 
-@app.route('/NewEntry', methods=['GET'])
-def NewEntry():
+#------------------------------------------------------------------------------------------------------------------------------
 
-    return send_from_directory("web", "newEntry.html")
 
 if __name__ == '__main__':
     app.run(port = 5000)

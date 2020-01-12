@@ -1,68 +1,70 @@
 <!DOCTYPE html>
 
 <html lang="en">
+  <head>
+    <title>Home</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <head>
-        <title>Home</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-        <!-- <link rel="stylesheet" href="https://bootswatch.com/3/slate/bootstrap.min.css"> -->
-        <link rel="stylesheet" href="https://bootswatch.com/3/cyborg/bootstrap.min.css">
-        <!-- <link rel="stylesheet" href="https://bootswatch.com/3/cosmo/bootstrap.min.css"> -->
-        <!-- <link rel="stylesheet" href="https://bootswatch.com/3/journal/bootstrap.min.css"> -->
-        <!-- <link rel="stylesheet" href="https://bootswatch.com/3/paper/bootstrap.min.css">  -->
-        <link rel="stylesheet" href="css/layout.css">
-
-    </head>
-    <body>
-      
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/">Sport Scan</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="/Report">Reports</a></li>
-                <li><a href="/NewEntry">New Entry</a></li>
-            </ul>
-            </div>
-        </nav>
-
-        <div class="jumbotron" style="padding-left: 5%;">
-            <img src="images/Logo.png">
-            <!-- <h1>Sport Scan Reporting</h1> -->
-            <br><br>
-            <h2 class="headerText" style="padding-left: 30px;">Home</h2>
+    <!-- <link rel="stylesheet" href="https://bootswatch.com/3/slate/bootstrap.min.css"> -->
+    <link
+      rel="stylesheet"
+      href="https://bootswatch.com/3/cyborg/bootstrap.min.css"
+    />
+    <!-- <link rel="stylesheet" href="https://bootswatch.com/3/cosmo/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://bootswatch.com/3/journal/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://bootswatch.com/3/paper/bootstrap.min.css">  -->
+    <link rel="stylesheet" href="css/layout.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Sport Scan</a>
         </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/">Home</a></li>
+          <li><a href="/Report">Reports</a></li>
+          <li><a href="/NewEntry">New Entry</a></li>
+        </ul>
+      </div>
+    </nav>
 
-    <div class="container container-fluid">
-        <div class="row">
-            <div class="col-lg-6 jumbotron">
-                <h2>Generate Report</h2>
-                <h3>Enter a date and pull the report for that day</h3>
-                <form action="/Report">
-                    <input type="submit" class="btn btn-lg btn-primary" value="Reports" />
-                </form>
-            </div>
-            <div class="col-lg-6 jumbotron" >
-                <h2>Add an Entry</h2>
-                <h3>Create a new entry in the database</h3>
-                <form action="/NewEntry">
-                    <input type="submit" class="btn btn-lg btn-primary" value="New Entry" />
-                </form>
-
-            </div>
-        </div>
+    <div class="jumbotron" style="padding-left: 5%;">
+      <img src="images/Logo.png" />
+      <!-- <h1>Sport Scan Reporting</h1> -->
+      <br /><br />
+      <h2 class="headerText" style="padding-left: 30px;">Home</h2>
     </div>
 
-
-    </body>
-
-
+    <div class="container container-fluid">
+      <div class="row">
+        <div class="col-lg-6 jumbotron">
+          <h2>Generate Report</h2>
+          <h3>Enter a date and pull the report for that day</h3>
+          <form action="/Report">
+            <input
+              type="submit"
+              class="btn btn-lg btn-primary"
+              value="Reports"
+            />
+          </form>
+        </div>
+        <div class="col-lg-6 jumbotron">
+          <h2>Add an Entry</h2>
+          <h3>Create a new entry in the database</h3>
+          <form action="/NewEntry">
+            <input
+              type="submit"
+              class="btn btn-lg btn-primary"
+              value="New Entry"
+            />
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
-
